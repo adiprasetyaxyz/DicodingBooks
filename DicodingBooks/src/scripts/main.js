@@ -2,25 +2,43 @@ const baseUrl = 'https://books-api.dicoding.dev';
 function main() {
 
   const getBook = () => {
-    // tuliskan kode di sini!
-    const xhr = new XMLHttpRequest();
+    // Menggunakan XHR
+    //const xhr = new XMLHttpRequest();
 
-    xhr.onload = function () {
-      const responseJson = JSON.parse(this.responseText);
+    // xhr.onload = function () {
+    //   const responseJson = JSON.parse(this.responseText);
     
-      if (responseJson.error) {
+    //   if (responseJson.error) {
+    //     showResponseMessage(responseJson.message);
+    //   } else {
+    //   renderAllBooks(responseJson.books);
+    //   }
+    // }
+    
+    //   xhr.onerror = function () {
+    //     showResponseMessage();
+    //   };
+    
+    //   xhr.open('GET', `${baseUrl}/list`);
+    //   xhr.send()
+
+      fetch('`${baseUrl}/list`')
+      .then(response => {
+        return response.json();
+      })
+      .then(responseJson => {
+
+        if (responseJson.error) {
+          showResponseMessage(responseJson.message);
+        } else {
+          renderAllBooks(responseJson.books);
+        }
+      })
+      .catch(error => {
         showResponseMessage(responseJson.message);
-      } else {
-      renderAllBooks(responseJson.books);
-      }
-    }
-    
-      xhr.onerror = function () {
-        showResponseMessage();
-      };
-    
-      xhr.open('GET', `${baseUrl}/list`);
-      xhr.send()
+
+      })
+  
   };
 
 
